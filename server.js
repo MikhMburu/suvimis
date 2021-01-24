@@ -1,19 +1,23 @@
 // Import libraries
 const express = require("express");
+const passport = require("passport");
 // Import files and variables
 const dbConnect = require("./config/db");
 const user = require("./routes/api/user");
 const task = require("./routes/api/task")
 const house = require("./routes/api/house");
-const tenant = require("./routes/api/tenant");;
+const tenant = require("./routes/api/tenant");
 // Define variables
 const app = express();
 const port = process.env.PORT || 5000;
 // Define Middleware
-app.use("/api/user", user);
-app.use("/api/tenant", tenant);
-app.use("/api/task", task);
-app.use("/api/house", house);
+  app.use(passport.initialize());
+  app.use(express.json());
+  app.use(express.urlencoded({extended: false}))
+  app.use("/api/user", user);
+  app.use("/api/tenant", tenant);
+  app.use("/api/task", task);
+  app.use("/api/house", house);
 // Define functions
   // Run database
   dbConnect();
