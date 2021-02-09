@@ -2,51 +2,62 @@
 const mongoose = require("mongoose");
 // Import files and/or variables
 // Define variables
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 // Create schema
 const houseSchema = new Schema({
   hseNo: {
     type: String,
-    required: true
+    required: true,
+  },
+  token_mtr_no: {
+    type: String,
+  },
+  current_occupant: {
+    type: String,
+    default: "",
   },
   occupants: [
     {
       tenant: {
         type: Schema.Types.ObjectId,
-        ref: "persons"
+        ref: "persons",
+      },
+      current: {
+        type: Boolean,
+        default: false,
       },
       date_of_entry: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now(),
       },
       date_of_exit: {
-        type: Date
+        type: Date,
       },
       rent_amt: {
         type: Number,
-        required: true
+        required: true,
       },
       damages: {
         type: Number,
-        default: 0
-      }
-    }
+        default: 0,
+      },
+    },
   ],
-  meter_readings:[
+  meter_readings: [
     {
       date_of_reading: {
         type: Date,
-        default: Date.now(),
-        required: true
+        default: Date.now,
+        required: true,
       },
       reading: {
         type: Number,
-        required: true
-      }
-    }
-  ]
-})
+        required: true,
+      },
+    },
+  ],
+});
 
 // Export model
 module.exports = House = mongoose.model("house", houseSchema);

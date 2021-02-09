@@ -25,6 +25,7 @@ const personSchema = new Schema({
   },
   designation: {
     type: String,
+    default: "Tenant",
     required: true
   },
   next_of_kin: {
